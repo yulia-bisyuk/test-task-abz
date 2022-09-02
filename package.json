@@ -2,7 +2,7 @@
   "name": "test-task-abz",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://yulia-bisyuk.github.io/test_task_abz/",
+  "homepage": "https://yulia-bisyuk.github.io/test-task-abz/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^12.1.4",
