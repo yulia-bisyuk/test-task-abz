@@ -1,0 +1,31 @@
+@import './variables';
+
+@mixin title($color: $textColor) {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 1;
+  text-align: center;
+
+  color: $color;
+}
+
+@mixin button($width: 100px, $bgColor: $primaryYellow, $color: $textColor) {
+  width: $width;
+  height: 34px;
+
+  border: none;
+  border-radius: 80px;
+  background-color: $bgColor;
+  color: $color;
+  cursor: pointer;
+  &:hover {
+    background-color: $hoverYellow;
+  }
+}
+
+@mixin flex($justifyContent: space-between) {
+  display: flex;
+  justify-content: $justifyContent;
+  align-items: center;
+}

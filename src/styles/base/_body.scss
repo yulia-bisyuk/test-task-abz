@@ -1,0 +1,11 @@
+@import '../utils/variables';
+
+body {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.6;
+  background-color: $backgroundColor;
+  color: $textColor;
+}

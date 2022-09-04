@@ -1,0 +1,92 @@
+body {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.6;
+  background-color: #f8f8f8;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  display: block;
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.container {
+  max-width: 360px;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-left: auto;
+  margin-right: auto;
+}
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 768px;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+}
+@media screen and (min-width: 2560px) {
+  .container {
+    max-width: 1170px;
+  }
+}
+
+.header {
+  background-color: white;
+}
+
+.headerContainer {
+  padding-top: 13px;
+  padding-bottom: 13px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.buttonHeader {
+  width: 100px;
+  height: 34px;
+  border: none;
+  border-radius: 80px;
+  background-color: #f4e041;
+  color: rgba(0, 0, 0, 0.87);
+  cursor: pointer;
+}
+.buttonHeader:hover {
+  background-color: #ffe302;
+}
+.buttonHeader:not(:last-child) {
+  margin-right: 10px;
+} /*# sourceMappingURL=header.css.map */

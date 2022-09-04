@@ -1,0 +1,100 @@
+@import '../../utils/main-utils';
+@import '../../base/main-base';
+
+.users {
+  margin-bottom: 140px;
+}
+
+.usersTitle {
+  margin-bottom: 50px;
+  @include title;
+}
+
+.usersList {
+  @media screen and (min-width: 768px) {
+    display: grid;
+    grid-template-columns: repeat(2, 344px);
+    grid-auto-rows: 254px;
+    gap: 16px;
+    justify-content: center;
+  }
+
+  @media screen and (min-width: 1024px) {
+    grid-template-columns: repeat(3, 282px);
+  }
+
+  @media screen and (min-width: 2560px) {
+    grid-template-columns: repeat(3, 370px);
+  }
+}
+
+.usersListItem {
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  text-align: center;
+
+  @media screen and (max-width: 767px) {
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    margin-bottom: 0px;
+  }
+}
+
+.usersListItemImage {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+  border-radius: 50%;
+}
+
+.usersListItemName {
+  margin-bottom: 20px;
+}
+
+.usersShowMoreBtn {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+  @include button($width: 120px);
+}
+
+.cutText {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.cutText:focus:after,
+.cutText:hover:after {
+  content: attr(data-text);
+  overflow: visible;
+  text-overflow: inherit;
+  position: absolute;
+  left: auto;
+  top: auto;
+
+  width: 288px;
+  background: rgba(0, 0, 0, 0.87);
+  color: white;
+  border-radius: 4px;
+  padding: 3px 16px;
+  white-space: normal;
+  word-wrap: break-word;
+  display: block;
+
+  @media screen and (min-width: 768px) {
+    width: 304px;
+  }
+  @media screen and (min-width: 1024px) {
+    width: 242px;
+  }
+  @media screen and (min-width: 2560px) {
+    width: 330px;
+  }
+}
