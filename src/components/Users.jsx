@@ -3,13 +3,11 @@ import { useGetUsersQuery } from 'redux/users/usersApi';
 import dummy from '../icons/user.svg';
 import '../styles/components/users/users.css';
 
-export const UsersGallery = () => {
+export const Users = () => {
   const [users, setUsers] = useState([]);
   const [page, setPage] = useState(1);
   const { data, isSuccess } = useGetUsersQuery(page);
-  if (isSuccess) console.log('users', data.users);
-  const timeInMs = Date.now();
-  console.log('timeInMs', timeInMs);
+  if (isSuccess) console.log('users', users);
 
   useEffect(() => {
     if (isSuccess) {
@@ -98,3 +96,5 @@ export const UsersGallery = () => {
     </section>
   );
 };
+
+

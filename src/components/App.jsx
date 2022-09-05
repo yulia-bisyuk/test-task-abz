@@ -1,13 +1,15 @@
 import { Header } from './Header';
 import { Hero } from './Hero';
-import { UsersGallery } from './UsersGallery';
+import { Users } from './Users';
+import { SignUpForm } from './SignUpForm';
 
 export const App = () => {
   return (
     <>
       <Header />
       <Hero />
-      <UsersGallery />
+      <Users />
+      <SignUpForm />
     </>
   );
 };

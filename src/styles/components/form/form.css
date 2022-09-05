@@ -1,0 +1,166 @@
+body {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.6;
+  background-color: #f8f8f8;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  display: block;
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.container {
+  max-width: 360px;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-left: auto;
+  margin-right: auto;
+}
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 768px;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+}
+@media screen and (min-width: 2560px) {
+  .container {
+    max-width: 1170px;
+  }
+}
+
+.form {
+  margin-bottom: 100px;
+  position: relative;
+}
+
+.formTitle {
+  margin-bottom: 50px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 1;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.formInputPositioning {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.formInputPositioning:not(:last-child) {
+  margin-bottom: 50px;
+}
+
+.formLabel {
+  position: absolute;
+  top: -7px;
+  left: 16px;
+  padding-left: 4px;
+  padding-right: 4px;
+  background-color: #f8f8f8;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.17;
+  color: #7e7e7e;
+}
+
+.formTextTypeInput {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+  width: 328px;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  padding-left: 16px;
+  border: 1px solid #d0cfcf;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+}
+.formTextTypeInput:focus {
+  outline: none;
+}
+.formTextTypeInput::-moz-placeholder {
+  color: #7e7e7e;
+}
+.formTextTypeInput:-ms-input-placeholder {
+  color: #7e7e7e;
+}
+.formTextTypeInput::placeholder {
+  color: #7e7e7e;
+}
+.formTextTypeInput::-moz-placeholder .none {
+  opacity: 0;
+}
+.formTextTypeInput:-ms-input-placeholder .none {
+  opacity: 0;
+}
+.formTextTypeInput::placeholder .none {
+  opacity: 0;
+}
+@media screen and (min-width: 768px) {
+  .formTextTypeInput {
+    width: 380px;
+  }
+}
+
+.formHelperText {
+  margin-left: 16px;
+  font-size: 12px;
+  color: #7e7e7e;
+}
+
+.signUpButton {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100px;
+  height: 34px;
+  border: none;
+  border-radius: 80px;
+  background-color: #f4e041;
+  color: rgba(0, 0, 0, 0.87);
+  cursor: pointer;
+}
+.signUpButton:hover {
+  background-color: #ffe302;
+} /*# sourceMappingURL=form.css.map */

@@ -1,0 +1,80 @@
+@import '../../utils/main-utils';
+@import '../../base/main-base';
+
+.form {
+  margin-bottom: 100px;
+  position: relative;
+}
+
+.formTitle {
+  margin-bottom: 50px;
+  @include title;
+}
+
+.formInputPositioning {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+
+  &:not(:last-child) {
+    margin-bottom: 50px;
+  }
+}
+
+.formLabel {
+  position: absolute;
+  top: -7px;
+  left: 16px;
+  padding-left: 4px;
+  padding-right: 4px;
+  background-color: $backgroundColor;
+
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.17;
+
+  color: $helperTextColor;
+}
+
+.formTextTypeInput {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+  width: 328px;
+
+  padding-top: 14px;
+  padding-bottom: 14px;
+  padding-left: 16px;
+  border: 1px solid $borderInputColor;
+  border-radius: 4px;
+  background-color: $backgroundColor;
+
+  &:focus {
+    outline: none;
+  }
+  &::placeholder {
+    color: $helperTextColor;
+    .none {
+      opacity: 0;
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    width: 380px;
+  }
+}
+
+.formHelperText {
+  margin-left: 16px;
+  font-size: 12px;
+  color: $helperTextColor;
+}
+
+.signUpButton {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  @include button;
+}
