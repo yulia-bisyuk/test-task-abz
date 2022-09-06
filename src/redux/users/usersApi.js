@@ -13,7 +13,21 @@ export const usersApi = createApi({
       query: page => `users?page=${page}&count=6`,
       providesTags: ['User'],
     }),
+    getPositions: builder.query({
+      query: () => `positions`,
+      providesTags: ['User'],
+    }),
+    signUpUser: builder.query({
+      query: (user, token) => ({
+        url: `users`,
+        method: 'POST',
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+        body: user,
+      }),
+    }),
   }),
 });
 
-export const { useGetUsersQuery } = usersApi;
+export const { useGetUsersQuery, useGetPositionsQuery } = usersApi;

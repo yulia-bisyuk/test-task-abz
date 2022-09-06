@@ -10,7 +10,7 @@ export const userValidationSchema = Yup.object({
     .max(100, 'Email must be maximum 100 characters')
     .matches(
       /^[\w-|.]+@([\w-]+\.)+[\w-]{2,4}$/,
-      'Email must contain "@" and "." characters and may contain "-" and "."characters before @'
+      'Email must contain "@" and domain name after it and may contain "-" and "."characters before @'
     )
     .required('Required'),
   phone: Yup.string()
@@ -20,17 +20,17 @@ export const userValidationSchema = Yup.object({
       'Number should start with code of Ukraine +380 and include 9 more digits'
     )
     .required('Required'),
-  //   position_id: Yup.number().min(1).required('* Required').positive().integer(),
-  //   photo: Yup.mixed()
-  //     .required('Required')
-  //     .test(
-  //       'fileSize', // unique name identifying the test
-  //       'File too large', // the validation error message
-  //       value => value && value.size <= 5000000 // test function, determines schema validity
-  //     )
-  //     .test(
-  //       'fileFormat', // unique name identifying the test
-  //       'Unsupported Format', // the validation error message
-  //       value => value && ['image/jpeg', 'image/jpg'].includes(value.type) // test function, determines schema validity
-  //     ),
+  position_id: Yup.number().min(1).required('* Required').positive().integer(),
+  photo: Yup.mixed()
+    .required('Required')
+    .test(
+      'fileSize', // unique name identifying the test
+      'File too large', // the validation error message
+      value => value && value.size <= 5000000 // test function, determines schema validity
+    )
+    .test(
+      'fileFormat', // unique name identifying the test
+      'Unsupported format of file', // the validation error message
+      value => value && ['image/jpeg', 'image/jpg'].includes(value.type) // test function, determines schema validity
+    ),
 });

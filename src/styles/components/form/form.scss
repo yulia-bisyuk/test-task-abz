@@ -1,9 +1,18 @@
 @import '../../utils/main-utils';
 @import '../../base/main-base';
 
-.form {
+.formSection {
   margin-bottom: 100px;
-  position: relative;
+}
+
+.form {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 328px;
+  @media screen and (min-width: 768px) {
+    width: 380px;
+  }
 }
 
 .formTitle {
@@ -13,9 +22,6 @@
 
 .formInputPositioning {
   position: relative;
-  margin-left: auto;
-  margin-right: auto;
-  width: fit-content;
 
   &:not(:last-child) {
     margin-bottom: 50px;
@@ -38,11 +44,12 @@
 }
 
 .formTextTypeInput {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+  //   display: block;
+  //   margin-left: auto;
+  //   margin-right: auto;
   box-sizing: border-box;
-  width: 328px;
+  width: 100%;
+  //   width: 328px;
 
   padding-top: 14px;
   padding-bottom: 14px;
@@ -56,20 +63,70 @@
   }
   &::placeholder {
     color: $helperTextColor;
-    .none {
-      opacity: 0;
-    }
   }
 
-  @media screen and (min-width: 768px) {
-    width: 380px;
-  }
+  //   @media screen and (min-width: 768px) {
+  //     width: 380px;
+  //   }
 }
 
 .formHelperText {
   margin-left: 16px;
   font-size: 12px;
   color: $helperTextColor;
+}
+
+.formTextError {
+  color: $errorRed;
+}
+
+.formInputError {
+  border: 1px solid $errorRed;
+}
+
+.formRadioGroup {
+  margin-bottom: 47px;
+  @media screen and (min-width: 768px) {
+    margin-bottom: 50px;
+  }
+}
+
+.formRadioGroupText {
+  margin-top: 25px;
+  margin-bottom: 11px;
+}
+
+.formRadioGroupLabel {
+  align-items: center;
+  display: flex;
+  &:not(:last-child) {
+    margin-bottom: 7px;
+  }
+}
+
+.formRadioGroupInput {
+  /* remove standard background appearance */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /* create custom radiobutton appearance */
+  display: inline-block;
+  margin-right: 12px;
+  width: 20px;
+  height: 20px;
+  padding: 4px;
+  /* background-color only for content */
+  background-clip: content-box;
+  border: 1px solid $borderInputColor;
+  background-color: $backgroundColor;
+  border-radius: 50%;
+
+  &:checked {
+    border: 1px solid $secondaryBlue;
+    background-color: $secondaryBlue;
+  }
+}
+.formFileTypeInput {
 }
 
 .signUpButton {

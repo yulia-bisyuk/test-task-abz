@@ -1,25 +1,35 @@
 import { Formik } from 'formik';
 import { userValidationSchema } from 'helpers/userValidationSchema';
 import { useState } from 'react';
+import { useGetPositionsQuery } from 'redux/users/usersApi';
 import '../styles/components/form/form.css';
 
 export const SignUpForm = () => {
   const [nameFilled, setNameFilled] = useState(false);
   const [emailFilled, setEmailFilled] = useState(false);
   const [phoneFilled, setPhoneFilled] = useState(false);
-  const [value, setValue] = useState('');
+  const { data, isSuccess } = useGetPositionsQuery();
+  if (isSuccess) console.log('positions', data.positions);
 
   const handleChange = e => {
-    setValue(e.target.value);
-    console.log(value);
     if (e.target.name === 'name') setNameFilled(true);
+    if (e.target.name === 'email') setEmailFilled(true);
+    if (e.target.name === 'phone') setPhoneFilled(true);
+  };
 
-    if (e.target.name === 'email' && e.target.value) setEmailFilled(true);
-    if (e.target.name === 'phone' && e.target.value) setPhoneFilled(true);
+  const handleSubmit = (values, { resetForm }) => {
+    console.log('values', values);
+    resetForm({
+      photo: '',
+    });
+    document.getElementById(values.position_id).checked = false; //formik doesn't reset radio buttons properly
+    setNameFilled(false);
+    setEmailFilled(false);
+    setPhoneFilled(false);
   };
 
   return (
-    <section className="form">
+    <section className="formSection">
       <div className="container">
         <h1 className="formTitle">Working with POST request</h1>
         <Formik
@@ -27,17 +37,18 @@ export const SignUpForm = () => {
             name: '',
             email: '',
             phone: '',
-            // position_id: null,
-            // photo: null,
+            position_id: null,
+            photo: null,
           }}
           validationSchema={userValidationSchema}
-          onSubmit={(values, { resetForm }) => {
-            console.log('values', values);
-            resetForm();
-          }}
+          onSubmit={(values, actions) => handleSubmit(values, actions)}
         >
           {formik => (
-            <form onSubmit={formik.handleSubmit} onChange={handleChange}>
+            <form
+              onSubmit={formik.handleSubmit}
+              onChange={handleChange}
+              className="form"
+            >
               <div>
                 <div className="formInputPositioning">
                   {nameFilled && <label className="formLabel">Your name</label>}
@@ -45,13 +56,19 @@ export const SignUpForm = () => {
                     id="name"
                     name="name"
                     type="text"
-                    className="formTextTypeInput"
-                    placeholder="Your name"
+                    className={
+                      formik.touched.name && formik.errors.name
+                        ? 'formTextTypeInput formInputError'
+                        : 'formTextTypeInput'
+                    }
+                    placeholder={nameFilled ? '' : 'Your name'}
                     onChange={formik.handleChange}
                     {...formik.getFieldProps('name')}
                   />
                   {formik.touched.name && formik.errors.name ? (
-                    <p className="formHelperText">{formik.errors.name}</p>
+                    <p className="formHelperText formTextError">
+                      {formik.errors.name}
+                    </p>
                   ) : null}
                 </div>
 
@@ -61,13 +78,19 @@ export const SignUpForm = () => {
                     id="email"
                     type="email"
                     name="email"
-                    className="formTextTypeInput"
-                    placeholder="Email"
+                    className={
+                      formik.touched.email && formik.errors.email
+                        ? 'formTextTypeInput formInputError'
+                        : 'formTextTypeInput'
+                    }
+                    placeholder={emailFilled ? '' : 'Email'}
                     onChange={formik.handleChange}
                     {...formik.getFieldProps('email')}
                   />
                   {formik.touched.email && formik.errors.email ? (
-                    <p className="formHelperText">{formik.errors.email}</p>
+                    <p className="formHelperText formTextError">
+                      {formik.errors.email}
+                    </p>
                   ) : null}
                 </div>
 
@@ -77,18 +100,59 @@ export const SignUpForm = () => {
                     id="phone"
                     type="text"
                     name="phone"
-                    className="formTextTypeInput"
-                    placeholder="Phone"
+                    className={
+                      formik.touched.phone && formik.errors.phone
+                        ? 'formTextTypeInput formInputError'
+                        : 'formTextTypeInput'
+                    }
+                    placeholder={phoneFilled ? '' : 'Phone'}
                     onChange={formik.handleChange}
                     {...formik.getFieldProps('phone')}
                   />
-                  <p className="formHelperText">+38 (XXX) XXX - XX - XX</p>
+                  <p className="formHelperText">+380XXXXXXXXX</p>
 
                   {formik.touched.phone && formik.errors.phone ? (
-                    <p className="formHelperText">{formik.errors.phone}</p>
+                    <p className="formHelperText formTextError">
+                      {formik.errors.phone}
+                    </p>
                   ) : null}
                 </div>
               </div>
+
+              <p className="formRadioGroupText">Select your position</p>
+
+              <div className="formRadioGroup">
+                {isSuccess &&
+                  data.positions.map(position => (
+                    <label className="formRadioGroupLabel" key={position.id}>
+                      <input
+                        id={position.id}
+                        type="radio"
+                        name="position_id"
+                        value={position.id}
+                        className="formRadioGroupInput"
+                        onChange={formik.handleChange}
+                      />
+                      {position.name}
+                    </label>
+                  ))}
+              </div>
+
+              <label>
+                <input
+                  id="photo"
+                  name="photo"
+                  type="file"
+                  onChange={e => {
+                    formik.setFieldValue('photo', e.currentTarget.files[0]);
+                  }}
+                />
+              </label>
+              {formik.touched.photo && formik.errors.photo ? (
+                <p className="formHelperText formTextError">
+                  {formik.errors.photo}
+                </p>
+              ) : null}
 
               <button type="submit" className="signUpButton">
                 Sign up
