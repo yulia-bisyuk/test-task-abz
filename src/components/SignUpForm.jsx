@@ -1,37 +1,65 @@
 import { Formik } from 'formik';
 import { userValidationSchema } from 'helpers/userValidationSchema';
 import { useState } from 'react';
-import { useGetPositionsQuery } from 'redux/users/usersApi';
+import {
+  useGetPositionsQuery,
+  useGetTokenQuery,
+  useSignUpUserMutation,
+} from 'redux/users/usersApi';
 import '../styles/components/form/form.css';
+import success from '../icons/success-image.svg';
+import ClipLoader from 'react-spinners/ClipLoader';
 
 export const SignUpForm = () => {
   const [nameFilled, setNameFilled] = useState(false);
   const [emailFilled, setEmailFilled] = useState(false);
   const [phoneFilled, setPhoneFilled] = useState(false);
+  const [radioBtnChecked, setRadioBtnChecked] = useState(false);
+  const [fileName, setFileName] = useState('');
   const { data, isSuccess } = useGetPositionsQuery();
-  if (isSuccess) console.log('positions', data.positions);
+  const { isSuccess: tokenFetched } = useGetTokenQuery();
+  const [
+    signUp,
+    { isLoading: userIsPosting, isSuccess: userPosted, isError, error },
+  ] = useSignUpUserMutation();
+  const buttonActive =
+    nameFilled && emailFilled && phoneFilled && radioBtnChecked && fileName
+      ? true
+      : false;
+  if (isError) console.log('isError', error.data.message);
 
   const handleChange = e => {
     if (e.target.name === 'name') setNameFilled(true);
     if (e.target.name === 'email') setEmailFilled(true);
     if (e.target.name === 'phone') setPhoneFilled(true);
+    if (e.target.name === 'position_id') setRadioBtnChecked(true);
   };
 
   const handleSubmit = (values, { resetForm }) => {
-    console.log('values', values);
-    resetForm({
-      photo: '',
-    });
+    const userData = new FormData();
+
+    userData.append('name', values.name);
+    userData.append('email', values.email);
+    userData.append('phone', values.phone);
+    userData.append('photo', values.photo);
+    userData.append('position_id', values.position_id);
+
+    if (tokenFetched) signUp(userData);
+
+    resetForm();
     document.getElementById(values.position_id).checked = false; //formik doesn't reset radio buttons properly
     setNameFilled(false);
     setEmailFilled(false);
     setPhoneFilled(false);
+    setFileName('');
   };
 
   return (
     <section className="formSection">
       <div className="container">
-        <h1 className="formTitle">Working with POST request</h1>
+        <h1 className="formTitle" id="signUp">
+          Working with POST request
+        </h1>
         <Formik
           initialValues={{
             name: '',
@@ -138,15 +166,38 @@ export const SignUpForm = () => {
                   ))}
               </div>
 
-              <label>
-                <input
-                  id="photo"
-                  name="photo"
-                  type="file"
-                  onChange={e => {
-                    formik.setFieldValue('photo', e.currentTarget.files[0]);
-                  }}
-                />
+              <input
+                id="photo"
+                name="photo"
+                type="file"
+                className="formFileInput"
+                placeholder="Upload your photo"
+                onChange={e => {
+                  formik.setFieldValue('photo', e.currentTarget.files[0]);
+                  setFileName(e.currentTarget.files[0].name);
+                }}
+              />
+              <label htmlFor="photo" className="formFileInputLabel">
+                <span
+                  className={
+                    formik.touched.photo && formik.errors.photo
+                      ? 'formFileInputUpload formInputError'
+                      : 'formFileInputUpload'
+                  }
+                >
+                  Upload
+                </span>
+                <span
+                  className={
+                    formik.touched.photo && formik.errors.photo
+                      ? 'formFileInputPlaceholder uploadPlaceholderError'
+                      : 'formFileInputPlaceholder'
+                  }
+                >
+                  {fileName
+                    ? fileName.slice(0, 30) + '...'
+                    : 'Upload your photo'}
+                </span>
               </label>
               {formik.touched.photo && formik.errors.photo ? (
                 <p className="formHelperText formTextError">
@@ -154,12 +205,36 @@ export const SignUpForm = () => {
                 </p>
               ) : null}
 
-              <button type="submit" className="signUpButton">
+              <button
+                type="submit"
+                disabled={buttonActive ? false : true}
+                className={
+                  buttonActive ? 'signUpButton' : 'signUpButton disabled'
+                }
+              >
                 Sign up
               </button>
             </form>
           )}
         </Formik>
+        {userIsPosting && (
+          <div className="formNotificationWrapper">
+            <ClipLoader color="#00bdd3" size="48px" />
+          </div>
+        )}
+        {userPosted && (
+          <div className="formNotificationWrapper">
+            <h1 className="formSuccessTitle">User successfully registered</h1>
+            <svg className="formSuccessPic" width="328" height="290">
+              <use href={success + '#success-image'} />
+            </svg>
+          </div>
+        )}
+        {isError && (
+          <div className="formNotificationWrapper">
+            <p className="formTextError">{error.data.message}</p>
+          </div>
+        )}
       </div>
     </section>
   );

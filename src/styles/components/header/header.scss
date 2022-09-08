@@ -11,6 +11,14 @@
   @include flex;
 }
 
+.headerLinksWrapper {
+  display: flex;
+}
+
+.headerAnchorLink {
+  margin-right: 10px;
+}
+
 .buttonHeader {
   @include button;
 

@@ -143,10 +143,6 @@ img {
   color: #cb3d40;
 }
 
-.formInputError {
-  border: 1px solid #cb3d40;
-}
-
 .formRadioGroup {
   margin-bottom: 47px;
 }
@@ -191,10 +187,57 @@ img {
   background-color: #00bdd3;
 }
 
+.formFileInput {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.formFileInputLabel {
+  display: flex;
+}
+
+.formFileInputUpload {
+  display: block;
+  padding: 14px 15px;
+  border: 1px solid rgba(0, 0, 0, 0.87);
+  border-radius: 4px 0px 0px 4px;
+  cursor: pointer;
+}
+
+.formFileInputPlaceholder {
+  display: block;
+  width: 245px;
+  padding: 14px 16px;
+  border-width: 1px 1px 1px 0px;
+  border-color: #d0cfcf;
+  border-style: solid;
+  border-radius: 0px 4px 4px 0px;
+  color: #7e7e7e;
+}
+@media screen and (min-width: 768px) {
+  .formFileInputPlaceholder {
+    width: 297px;
+  }
+}
+
+.uploadPlaceholderError {
+  border-color: #cb3d40;
+}
+
+.formInputError {
+  border: 1px solid #cb3d40;
+}
+
 .signUpButton {
   display: block;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 50px;
+  margin-bottom: 50px;
   width: 100px;
   height: 34px;
   border: none;
@@ -205,4 +248,41 @@ img {
 }
 .signUpButton:hover {
   background-color: #ffe302;
+}
+
+.disabled {
+  background-color: #b4b4b4;
+  color: white;
+}
+.disabled:hover {
+  background-color: #b4b4b4;
+}
+
+.formNotificationWrappers {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-right: auto;
+  margin-left: auto;
+  width: 328px;
+}
+@media screen and (min-width: 768px) {
+  .formNotificationWrappers {
+    width: 380px;
+  }
+}
+
+.formSuccessPic {
+  margin-top: 50px;
+  width: 100%;
+}
+
+.formSuccessTitle {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 1;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.87);
 } /*# sourceMappingURL=form.css.map */

@@ -13,7 +13,9 @@ export const Hero = () => {
             mind. They should also be excited to learn, as the world of
             Front-End Development keeps evolving.
           </p>
-          <button className="heroButton">Sign Up</button>
+          <a href="#signUp">
+            <button className="heroButton">Sign Up</button>
+          </a>
         </div>
       </div>
     </section>

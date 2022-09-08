@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useGetUsersQuery } from 'redux/users/usersApi';
+
 import dummy from '../icons/user.svg';
 import '../styles/components/users/users.css';
 
@@ -29,7 +30,9 @@ export const Users = () => {
   return (
     <section className="users">
       <div className="container">
-        <h1 className="usersTitle">Working with GET request</h1>
+        <h1 className="usersTitle" id="users">
+          Working with GET request
+        </h1>
         <ul className="usersList">
           {isSuccess &&
             users
@@ -83,6 +86,7 @@ export const Users = () => {
                 </li>
               ))}
         </ul>
+
         {isSuccess && page !== data.total_pages && (
           <button
             onClick={() => setPage(page + 1)}
@@ -96,5 +100,3 @@ export const Users = () => {
     </section>
   );
 };
-
-

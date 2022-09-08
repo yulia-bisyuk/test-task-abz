@@ -98,3 +98,14 @@
     width: 330px;
   }
 }
+
+.formNotificationWrappers {
+  @include flex($justifyContent: center);
+  flex-direction: column;
+  margin-right: auto;
+  margin-left: auto;
+  width: 328px;
+  @media screen and (min-width: 768px) {
+    width: 380px;
+  }
+}

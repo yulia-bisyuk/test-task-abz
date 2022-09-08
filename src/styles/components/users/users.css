@@ -183,4 +183,19 @@ img {
   .cutText:hover:after {
     width: 330px;
   }
+}
+
+.formNotificationWrappers {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-right: auto;
+  margin-left: auto;
+  width: 328px;
+}
+@media screen and (min-width: 768px) {
+  .formNotificationWrappers {
+    width: 380px;
+  }
 } /*# sourceMappingURL=users.css.map */

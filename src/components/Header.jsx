@@ -8,9 +8,13 @@ export const Header = () => {
         <svg width="104" height="26">
           <use href={logo + '#logo-icon'} />
         </svg>
-        <div>
-          <button className="buttonHeader">Users</button>
-          <button className="buttonHeader">Sign up</button>
+        <div className="headerLinksWrapper">
+          <a href="#users" className="headerAnchorLink">
+            <button className="buttonHeader">Users</button>
+          </a>
+          <a href="#signUp">
+            <button className="buttonHeader">Sign up</button>
+          </a>
         </div>
       </div>
     </header>

@@ -76,6 +76,14 @@ img {
   align-items: center;
 }
 
+.headerLinksWrapper {
+  display: flex;
+}
+
+.headerAnchorLink {
+  margin-right: 10px;
+}
+
 .buttonHeader {
   width: 100px;
   height: 34px;
