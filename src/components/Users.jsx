@@ -1,20 +1,20 @@
 import { useEffect, useState } from 'react';
 import { useGetUsersQuery } from 'redux/users/usersApi';
-
+import ClipLoader from 'react-spinners/ClipLoader';
 import dummy from '../icons/user.svg';
 import '../styles/components/users/users.css';
 
-export const Users = () => {
+export const Users = ({ page, setPage }) => {
   const [users, setUsers] = useState([]);
-  const [page, setPage] = useState(1);
-  const { data, isSuccess } = useGetUsersQuery(page);
-  if (isSuccess) console.log('users', users);
+  const { data, isSuccess, isFetching } = useGetUsersQuery(page);
 
   useEffect(() => {
-    if (isSuccess) {
-      setUsers(prevUsers => [...new Set([...prevUsers, ...data.users])]);
+    if (isSuccess && page === 1) {
+      setUsers([...data.users]);
     }
-  }, [isSuccess, data]);
+    if (isSuccess && page > 1)
+      setUsers(prevUsers => [...new Set([...prevUsers, ...data.users])]);
+  }, [isSuccess, data, page]);
 
   const phoneFormatter = numbers => {
     let phone =
@@ -86,6 +86,12 @@ export const Users = () => {
                 </li>
               ))}
         </ul>
+
+        {isFetching && (
+          <div className="loaderWrapper">
+            <ClipLoader color="#00bdd3" size="48px" />
+          </div>
+        )}
 
         {isSuccess && page !== data.total_pages && (
           <button

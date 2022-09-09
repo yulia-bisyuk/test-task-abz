@@ -10,10 +10,14 @@ export const Header = () => {
         </svg>
         <div className="headerLinksWrapper">
           <a href="#users" className="headerAnchorLink">
-            <button className="buttonHeader">Users</button>
+            <button className="buttonHeader" type="button">
+              Users
+            </button>
           </a>
           <a href="#signUp">
-            <button className="buttonHeader">Sign up</button>
+            <button className="buttonHeader" type="button">
+              Sign up
+            </button>
           </a>
         </div>
       </div>

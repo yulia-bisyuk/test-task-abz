@@ -1,32 +1,32 @@
 import { Formik } from 'formik';
-import { userValidationSchema } from 'helpers/userValidationSchema';
 import { useState } from 'react';
 import {
   useGetPositionsQuery,
   useGetTokenQuery,
   useSignUpUserMutation,
 } from 'redux/users/usersApi';
+import { userValidationSchema } from 'helpers/userValidationSchema';
 import '../styles/components/form/form.css';
 import success from '../icons/success-image.svg';
 import ClipLoader from 'react-spinners/ClipLoader';
 
-export const SignUpForm = () => {
+export const SignUpForm = ({ page, setPage }) => {
   const [nameFilled, setNameFilled] = useState(false);
   const [emailFilled, setEmailFilled] = useState(false);
   const [phoneFilled, setPhoneFilled] = useState(false);
   const [radioBtnChecked, setRadioBtnChecked] = useState(false);
   const [fileName, setFileName] = useState('');
-  const { data, isSuccess } = useGetPositionsQuery();
+  const { data, isSuccess: positionsFetched } = useGetPositionsQuery();
   const { isSuccess: tokenFetched } = useGetTokenQuery();
   const [
     signUp,
     { isLoading: userIsPosting, isSuccess: userPosted, isError, error },
   ] = useSignUpUserMutation();
-  const buttonActive =
+
+  const buttonIsActive =
     nameFilled && emailFilled && phoneFilled && radioBtnChecked && fileName
       ? true
       : false;
-  if (isError) console.log('isError', error.data.message);
 
   const handleChange = e => {
     if (e.target.name === 'name') setNameFilled(true);
@@ -37,7 +37,6 @@ export const SignUpForm = () => {
 
   const handleSubmit = (values, { resetForm }) => {
     const userData = new FormData();
-
     userData.append('name', values.name);
     userData.append('email', values.email);
     userData.append('phone', values.phone);
@@ -52,6 +51,7 @@ export const SignUpForm = () => {
     setEmailFilled(false);
     setPhoneFilled(false);
     setFileName('');
+    setPage(1);
   };
 
   return (
@@ -150,7 +150,7 @@ export const SignUpForm = () => {
               <p className="formRadioGroupText">Select your position</p>
 
               <div className="formRadioGroup">
-                {isSuccess &&
+                {positionsFetched &&
                   data.positions.map(position => (
                     <label className="formRadioGroupLabel" key={position.id}>
                       <input
@@ -195,7 +195,7 @@ export const SignUpForm = () => {
                   }
                 >
                   {fileName
-                    ? fileName.slice(0, 30) + '...'
+                    ? fileName.slice(0, 20) + '...'
                     : 'Upload your photo'}
                 </span>
               </label>
@@ -207,9 +207,9 @@ export const SignUpForm = () => {
 
               <button
                 type="submit"
-                disabled={buttonActive ? false : true}
+                disabled={buttonIsActive ? false : true}
                 className={
-                  buttonActive ? 'signUpButton' : 'signUpButton disabled'
+                  buttonIsActive ? 'signUpButton' : 'signUpButton disabled'
                 }
               >
                 Sign up
@@ -217,12 +217,14 @@ export const SignUpForm = () => {
             </form>
           )}
         </Formik>
+
         {userIsPosting && (
           <div className="formNotificationWrapper">
             <ClipLoader color="#00bdd3" size="48px" />
           </div>
         )}
-        {userPosted && (
+
+        {userPosted && page === 1 && (
           <div className="formNotificationWrapper">
             <h1 className="formSuccessTitle">User successfully registered</h1>
             <svg className="formSuccessPic" width="328" height="290">
@@ -230,6 +232,7 @@ export const SignUpForm = () => {
             </svg>
           </div>
         )}
+
         {isError && (
           <div className="formNotificationWrapper">
             <p className="formTextError">{error.data.message}</p>

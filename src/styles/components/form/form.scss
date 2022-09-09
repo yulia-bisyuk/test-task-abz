@@ -113,6 +113,7 @@
     background-color: $secondaryBlue;
   }
 }
+
 .formFileInput {
   width: 0.1px;
   height: 0.1px;
@@ -133,6 +134,7 @@
   border-radius: 4px 0px 0px 4px;
   cursor: pointer;
 }
+
 .formFileInputPlaceholder {
   display: block;
   width: 245px;
@@ -147,6 +149,7 @@
     width: 297px;
   }
 }
+
 .uploadPlaceholderError {
   border-color: $errorRed;
 }
@@ -172,7 +175,7 @@
   }
 }
 
-.formNotificationWrappers {
+.formNotificationWrapper {
   @include flex($justifyContent: center);
   flex-direction: column;
   margin-right: auto;
@@ -183,12 +186,11 @@
   }
 }
 
-.formSuccessPic {
-  //   display: block;
-  margin-top: 50px;
-  width: 100%;
-}
-
 .formSuccessTitle {
   @include title;
+}
+
+.formSuccessPic {
+  margin-top: 50px;
+  width: 100%;
 }

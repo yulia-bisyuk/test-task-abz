@@ -64,6 +64,15 @@
   @include button($width: 120px);
 }
 
+.loaderWrapper {
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+}
+
+// text styles if user name or user email are too long
+
 .cutText {
   text-overflow: ellipsis;
   overflow: hidden;
@@ -96,16 +105,5 @@
   }
   @media screen and (min-width: 2560px) {
     width: 330px;
-  }
-}
-
-.formNotificationWrappers {
-  @include flex($justifyContent: center);
-  flex-direction: column;
-  margin-right: auto;
-  margin-left: auto;
-  width: 328px;
-  @media screen and (min-width: 768px) {
-    width: 380px;
   }
 }
