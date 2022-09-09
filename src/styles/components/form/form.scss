@@ -194,3 +194,9 @@
   margin-top: 50px;
   width: 100%;
 }
+
+.cutPlaceholder {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}

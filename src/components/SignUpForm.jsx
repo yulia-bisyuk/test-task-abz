@@ -191,12 +191,12 @@ export const SignUpForm = ({ page, setPage }) => {
                   className={
                     formik.touched.photo && formik.errors.photo
                       ? 'formFileInputPlaceholder uploadPlaceholderError'
+                      : 'formFileInputPlaceholder' && fileName
+                      ? ' formFileInputPlaceholder cutPlaceholder'
                       : 'formFileInputPlaceholder'
                   }
                 >
-                  {fileName
-                    ? fileName.slice(0, 20) + '...'
-                    : 'Upload your photo'}
+                  {fileName ? fileName : 'Upload your photo'}
                 </span>
               </label>
               {formik.touched.photo && formik.errors.photo ? (
